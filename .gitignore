@@ -159,3 +159,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 /media/mldadmin/home/s123mdg34_04/WangShengyuan/IE4483_furryyy/datasets
+
+# output files and weights
+*.csv
+*.pth
+datasets/
