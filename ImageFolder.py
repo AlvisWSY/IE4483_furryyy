@@ -4,6 +4,8 @@ from typing import Any, Callable, cast, Dict, List, Optional, Tuple, Union
 
 from PIL import Image
 
+import torch
+
 from torchvision.datasets.vision import VisionDataset
 from torchvision.datasets.folder import find_classes, make_dataset
 
@@ -53,6 +55,7 @@ class DatasetFolder(VisionDataset):
 
         self.classes = classes
         self.class_to_idx = class_to_idx
+        #self.class_to_idx = {'cat' : torch.tensor([1, 0]), 'dog' : torch.tensor([0,1])}
         self.samples = samples
         self.targets = [s[1] for s in samples]
 
@@ -130,6 +133,10 @@ class DatasetFolder(VisionDataset):
             tuple: (sample, target) where target is class_index of the target class.
         """
         path, target = self.samples[index]
+        if target == 0:
+            target = torch.tensor([1.,0.], dtype=torch.float32)
+        else:
+            target = torch.tensor([0.,1.], dtype=torch.float32)
         sample = self.loader(path)
         if self.transform is not None:
             sample = self.transform(sample)
