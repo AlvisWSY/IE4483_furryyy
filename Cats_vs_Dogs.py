@@ -22,7 +22,7 @@ import pandas as pd
 # Load_Checkpoint = True
 
 # Learning_Rate
-lr=1e-3
+lr=1e-2
 
 # Data_Transform, Train data processing: RandomRotation, Resize, Normalize
 train_transform = transforms.Compose([
@@ -104,4 +104,4 @@ for epoch in range(num_epochs):
 filename = f"Results/CD/results_lr{lr}.csv"
 df.to_csv(filename, index=False)
 checkpoint_name = f"Checkpoints/CD/checkpoint_lr{lr}.pth"
-torch.save(model, checkpoint_name)
+torch.save(model.state_dict(), checkpoint_name)

@@ -108,4 +108,4 @@ for epoch in range(num_epochs):
 filename = f"Results/CIFAR10/results_lr{lr}.csv"
 df.to_csv(filename, index=False)
 checkpoint_name = f"Checkpoints/CIFAR10/checkpoint_lr{lr}.pth"
-torch.save(model, checkpoint_name)
+torch.save(model.state_dict(), checkpoint_name)
