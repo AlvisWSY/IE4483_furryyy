@@ -161,4 +161,4 @@ cython_debug/
 
 # output files and weights
 Checkpoints/
-Cats_vs_Dogs_Datasets/
+data/
