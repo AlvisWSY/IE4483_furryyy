@@ -23,7 +23,7 @@ import pandas as pd
 # Load_Checkpoint = True
 
 # Learning_Rate
-lr=1e-3
+lr=1e-2
 
 # Data_Transform, Train data processing: RandomRotation, Resize, Normalize
 train_transform = transforms.Compose([
