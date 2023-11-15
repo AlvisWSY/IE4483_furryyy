@@ -101,7 +101,7 @@ for epoch in range(num_epochs):
     df = df.append({'epoch': epoch, 'train_acc': train_acc, 'train_loss': train_loss, 'test_acc': test_acc, 'test_loss': test_loss}, ignore_index=True)
 
 # save the dataframe as a csv file
-filename = f"results_lr{lr}.csv"
+filename = f"Results/CD/results_lr{lr}.csv"
 df.to_csv(filename, index=False)
-checkpoint_name = f"checkpoint_lr{lr}.pth"
+checkpoint_name = f"Checkpoints/CD/checkpoint_lr{lr}.pth"
 torch.save(model, checkpoint_name)
