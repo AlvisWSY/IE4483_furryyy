@@ -44,6 +44,8 @@ test_data = CIFAR10(root='./data', train=False, transform=test_transform)
 train_dataset = DataLoader(train_data, batch_size=256, shuffle=True)
 test_dataset = DataLoader(test_data, batch_size=256, shuffle=False)
 
+
+
 class Head(nn.Module):
     def __init__(self, in_features, out_features, Backbone):
         super().__init__()
@@ -53,11 +55,11 @@ class Head(nn.Module):
     def forward(self, x):
         x = self.Backbone(x)
         x = self.linear(x)
-        x = torch.squeeze(x, 1)
+        # x = torch.squeeze(x, 1)
         return x
     
 # Model Settings
-model = Head(in_features=1000, out_features=2, Backbone=resnet50(weights=ResNet50_Weights.IMAGENET1K_V2))
+model = Head(in_features=1000, out_features=10, Backbone=resnet50(weights=ResNet50_Weights.IMAGENET1K_V2))
 
 # Device Settings
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -79,7 +81,7 @@ for epoch in range(num_epochs):
         outputs = model(inputs)
         loss = criterion(outputs, labels)
         train_loss += loss.cpu().detach().numpy()
-        train_acc += torch.sum(torch.eq(torch.max(labels, 1).indices, torch.max(outputs, 1).indices)).cpu().detach().numpy()
+        train_acc += torch.sum(torch.eq(labels, torch.max(outputs, 1).indices)).cpu().detach().numpy()
         loss.backward()
         optimizer.step()
     train_loss /= len(train_dataset)
@@ -95,7 +97,7 @@ for epoch in range(num_epochs):
             outputs = model(inputs)
             loss = criterion(outputs, labels)
             test_loss += loss.cpu().detach().numpy()
-            test_acc += torch.sum(torch.eq(torch.max(labels, 1).indices, torch.max(outputs, 1).indices)).cpu().detach().numpy()
+            test_acc += torch.sum(torch.eq(labels, torch.max(outputs, 1).indices)).cpu().detach().numpy()
         test_loss /= len(test_dataset)
         test_acc = test_acc/len(test_data)*100
         print('Epoch: {} | Test | Loss: {:.4f}, Acc: {:.2f}'.format(epoch, test_loss, test_acc))
