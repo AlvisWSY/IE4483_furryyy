@@ -160,6 +160,5 @@ cython_debug/
 #.idea/
 
 # output files and weights
-*.csv
-*.pth
-datasets/
+Checkpoints/
+Cats_vs_Dogs_Datasets/
