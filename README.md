@@ -27,7 +27,10 @@ Use `conda env create -f environment.yml` to create env for this project
 
 `figure.png`shows accuracy differences of model when LearningRate settled to different values (1e-3, 1e-2, 5e-3, 5e-2)
 
+`layers.txt`contains layer information of the model, exported from **_torchsummary_**
+
 `Result` folder contains loss and accuracy data under different LR
 
 `Checkpoints` folder contains saved model.
+
 
