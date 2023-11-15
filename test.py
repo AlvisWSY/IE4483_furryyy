@@ -22,7 +22,7 @@ import pandas as pd
 # Load_Checkpoint = True
 
 # Learning_Rate
-lr=1e-3
+lr=1e-2
 
 # Data_Transform
 test_transform = transforms.Compose([
@@ -74,8 +74,5 @@ with torch.no_grad():
 # add the results to the dataframe
 pd.DataFrame(res).to_csv('res.csv', index=False)
 
-# save the dataframe as a csv file
-filename = f"Results/CD/results_lr{lr}.csv"
-checkpoint_name = f"Checkpoints/CD/checkpoint_lr{lr}.pth"
 
 
