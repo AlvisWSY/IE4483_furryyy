@@ -24,13 +24,7 @@ import pandas as pd
 # Learning_Rate
 lr=1e-3
 
-# Data_Transform, Train data processing: RandomRotation, Resize, Normalize
-train_transform = transforms.Compose([
-    transforms.RandomRotation((0,180), transforms.InterpolationMode.BILINEAR, expand=True),
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
-])
+# Data_Transform
 test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -66,8 +60,6 @@ optimizer = torch.optim.SGD(model.parameters(), lr, momentum=0.9)
 
 res = []
 
-test_acc = 0
-test_loss = 0
 model.eval()
 with torch.no_grad():
     for inputs, _, direcs in tqdm(test_dataset):
@@ -77,10 +69,10 @@ with torch.no_grad():
         for direc, pred in zip(direcs, preds.cpu().detach().numpy().tolist()):
             res.append({
                 "img_dir": direc,
-    test_acc = test_acc/len(test_data)*100
-    # print('Epoch: {} | Test | Loss: {:.4f}, Acc: {:.2f}'.format(epoch, test_loss, test_acc))
+                "pred": pred
+            })
 # add the results to the dataframe
-pd.DataFrame(res).to_csv('res.csv')
+pd.DataFrame(res).to_csv('res.csv', index=False)
 
 # save the dataframe as a csv file
 filename = f"Results/CD/results_lr{lr}.csv"
