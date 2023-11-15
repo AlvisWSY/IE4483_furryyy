@@ -77,12 +77,6 @@ with torch.no_grad():
         for direc, pred in zip(direcs, preds.cpu().detach().numpy().tolist()):
             res.append({
                 "img_dir": direc,
-                "pred": pred
-            })
-        loss = criterion(outputs, _)
-        test_loss += loss.cpu().detach().numpy()
-        test_acc += torch.sum(torch.eq(torch.max(_, 1).indices, torch.max(outputs, 1).indices)).cpu().detach().numpy()
-    test_loss /= len(test_dataset)
     test_acc = test_acc/len(test_data)*100
     # print('Epoch: {} | Test | Loss: {:.4f}, Acc: {:.2f}'.format(epoch, test_loss, test_acc))
 # add the results to the dataframe
