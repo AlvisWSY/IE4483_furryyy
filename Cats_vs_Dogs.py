@@ -37,8 +37,8 @@ test_transform = transforms.Compose([
     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 ])
 
-train_data = ImageFolder("datasets/train", train_transform)
-test_data = ImageFolder("datasets/val", test_transform)
+train_data = ImageFolder("Cats_vs_Dogs_Datasets/train", train_transform)
+test_data = ImageFolder("Cats_vs_Dogs_Datasets/val", test_transform)
 train_dataset = DataLoader(train_data, batch_size=256, shuffle=True)
 test_dataset = DataLoader(test_data, batch_size=256, shuffle=False)
 
