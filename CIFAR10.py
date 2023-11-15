@@ -73,7 +73,7 @@ for epoch in range(num_epochs):
     train_acc = 0
     train_loss = 0
     model.train()
-    for inputs, labels, direc in tqdm(train_dataset):
+    for inputs, labels in tqdm(train_dataset):
         inputs, labels = inputs.to(device), labels.to(device)
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -90,7 +90,7 @@ for epoch in range(num_epochs):
     test_loss = 0
     model.eval()
     with torch.no_grad():
-        for inputs, labels, direc in tqdm(test_dataset):
+        for inputs, labels in tqdm(test_dataset):
             inputs, labels = inputs.to(device), labels.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, labels)
